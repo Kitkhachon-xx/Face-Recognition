@@ -8,7 +8,7 @@ FACE_SIZE = (FACE_BOX[2] - FACE_BOX[0], FACE_BOX[3] - FACE_BOX[1])  # (width, he
 
 
 def knn(X, y, z, k=1):
-    d = np.sum((X.astype(np.float64) - z.astype(np.float64)) ** 2, axis=1)
+    d = np.sum((X - z) ** 2, axis=1)
     idx = np.argsort(d)[:k]
     cls, vote = np.unique(y[idx], return_counts=True)
     return cls[np.argmax(vote)]

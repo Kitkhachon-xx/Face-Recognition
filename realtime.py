@@ -29,7 +29,7 @@ def main():
         cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 26, 125), 2)
 
         if len(detected) > 0:
-            label = knn(X, y, gray.flatten(), k=3)
+            label = knn(X, y, gray.flatten(), k=4)
             cv2.putText(
                 frame, str(label), (x1, y1 - 10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 26, 125), 2
