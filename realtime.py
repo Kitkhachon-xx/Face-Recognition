@@ -1,14 +1,8 @@
 import cv2
-
 from Knn import knn, Create_Data, FACE_BOX
-
 
 def main():
     X, y = Create_Data()
-
-    face_cascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
-    )
 
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
@@ -22,18 +16,13 @@ def main():
         face = frame[y1:y2, x1:x2, :]
         gray = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-        detected = face_cascade.detectMultiScale(
-            gray, scaleFactor=1.1, minNeighbors=5, minSize=(60, 60)
-        )
 
         cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 26, 125), 2)
 
-        if len(detected) > 0:
-            label = knn(X, y, gray.flatten(), k=4)
-            cv2.putText(
-                frame, str(label), (x1, y1 - 10),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 26, 125), 2
-            )
+
+        label = knn(X, y, gray.flatten(), k=4)
+
+        cv2.putText(frame, str(label), (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 26, 125), 2)
 
         cv2.imshow("face", gray)
         cv2.imshow("frame", frame)

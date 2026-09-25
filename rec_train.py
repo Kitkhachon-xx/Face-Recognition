@@ -1,6 +1,5 @@
 import cv2
 import os
-
 from Knn import FACE_BOX
 
 def capture_face():
